@@ -60,7 +60,7 @@ class _LocationMobile extends StatelessWidget {
               ),
               const SizedBox( height: 20.0, ),
               new FractionallySizedBox(
-                widthFactor: 0.9,
+                widthFactor: 0.8,
                 child: new SizedBox(
                   height: 400,
                   child: _getMap(),
@@ -68,7 +68,7 @@ class _LocationMobile extends StatelessWidget {
               ),
               const SizedBox( height: 20, ),
               new FractionallySizedBox(
-                widthFactor: 0.9,
+                widthFactor: 0.8,
                 child: new RaisedButton(
                   child: const Text(
                     "Tunjukkan Arah",
@@ -177,8 +177,8 @@ class _LocationDesktop extends StatelessWidget {
               const SizedBox( height: 20, ),
               new Image.asset(
                 "res/images/location_qr_code.png",
-                height: 500,
-                width: 500,
+                height: MIN_WIDTH,
+                width: MIN_WIDTH,
               ),
               const SizedBox( height: 40, ),
             ],
