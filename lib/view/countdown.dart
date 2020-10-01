@@ -43,6 +43,7 @@ class _CountdownMobile extends GetView<CountDownController> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               children: [
+                const SizedBox( height: 10.0, ),
                 new Text(
                   "Lenda & Riyanto",
                   textAlign: TextAlign.center,
@@ -85,11 +86,17 @@ class _CountdownMobile extends GetView<CountDownController> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     new Obx(
-                          () => new _Count( count: controller.days, description: "Hari", ),
+                          () => new _Count(
+                            count: controller.days,
+                            description: "Hari",
+                          ),
                     ),
                     const SizedBox( width: 10, ),
                     new Obx(
-                          () => new _Count( count: controller.hours, description: "Jam", ),
+                          () => new _Count(
+                            count: controller.hours,
+                            description: "Jam",
+                          ),
                     ),
                   ],
                 ),
@@ -140,6 +147,7 @@ class _CountdownDesktop extends GetView<CountDownController> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              const SizedBox( height: 10.0, ),
               new Text(
                 "Lenda & Riyanto",
                 textAlign: TextAlign.center,
@@ -182,19 +190,39 @@ class _CountdownDesktop extends GetView<CountDownController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   new Obx(
-                        () => new _Count( count: controller.days, description: "Hari", ),
+                        () => new _Count(
+                          count: controller.days,
+                          description: "Hari",
+                          clockArea: 28,
+                          tickThickness: 8,
+                        ),
                   ),
                   const SizedBox( width: 20, ),
                   new Obx(
-                        () => new _Count( count: controller.hours, description: "Jam", ),
+                        () => new _Count(
+                          count: controller.hours,
+                          description: "Jam",
+                          clockArea: 28,
+                          tickThickness: 8,
+                        ),
                   ),
                   const SizedBox( width: 20, ),
                   new Obx(
-                        () => new _Count( count: controller.minutes, description: "Menit", ),
+                        () => new _Count(
+                          count: controller.minutes,
+                          description: "Menit",
+                          clockArea: 28,
+                          tickThickness: 8,
+                        ),
                   ),
                   const SizedBox( width: 20, ),
                   new Obx(
-                        () => new _Count( count: controller.seconds, description: "Detik", ),
+                        () => new _Count(
+                          count: controller.seconds,
+                          description: "Detik",
+                          clockArea: 28,
+                          tickThickness: 8,
+                        ),
                   ),
                 ],
               ),
@@ -210,9 +238,10 @@ class _CountdownDesktop extends GetView<CountDownController> {
 class _Count extends StatelessWidget {
 
   final int count;
+  final double clockArea, tickThickness;
   final String description;
 
-  const _Count({Key key, this.count, this.description}) : super(key: key);
+  const _Count({Key key, this.count, this.description, this.clockArea = 18, this.tickThickness,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => new Card(
@@ -226,8 +255,8 @@ class _Count extends StatelessWidget {
             digitCount: 2,
             tickColor: Colors.white,
             baseColor: Theme.of(context).primaryColor,
-            clockArea: 28,
-            tickThickness: 8,
+            clockArea: clockArea,
+            tickThickness: tickThickness,
             flatStyle: false,
             curve: Curves.elasticOut,
             hideTick: true,
