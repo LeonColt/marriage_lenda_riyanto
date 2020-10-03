@@ -53,7 +53,7 @@ class _LocationMobile extends StatelessWidget {
                 "Lokasi",
                 textAlign: TextAlign.center,
                 style: new TextStyle(
-                  color: Colors.white,
+                  color: Colors.black87,
                   fontWeight: FontWeight.w500,
                   fontSize: 48.0,
                 ),
@@ -78,7 +78,7 @@ class _LocationMobile extends StatelessWidget {
                     ),
                   ),
                   color: Theme.of(context).primaryColor,
-                  textColor: Colors.white,
+                  textColor: Colors.black87,
                   padding: const EdgeInsets.all( 20.0 ),
                   onPressed: _navigateToWeddingLocation,
                 ),
@@ -89,14 +89,14 @@ class _LocationMobile extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.w500,
-                  color: Colors.white,
+                  color: Colors.black87,
                 ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox( height: 20, ),
               new SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.width * 0.9,
+                width: MediaQuery.of(context).size.width * 0.7,
+                height: MediaQuery.of(context).size.width * 0.7,
                 child: new Image.asset(
                   "res/images/location_qr_code.png",
                 ),
@@ -140,7 +140,7 @@ class _LocationDesktop extends StatelessWidget {
                 "Lokasi",
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: Colors.black87,
                   fontWeight: FontWeight.w700,
                   fontSize: 48.0,
                 ),
@@ -161,7 +161,7 @@ class _LocationDesktop extends StatelessWidget {
                   ),
                 ),
                 color: Theme.of(context).primaryColor,
-                textColor: Colors.white,
+                textColor: Colors.black87,
                 padding: const EdgeInsets.all( 20.0 ),
                 onPressed: _navigateToWeddingLocation,
               ),
@@ -171,7 +171,7 @@ class _LocationDesktop extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.w500,
-                  color: Colors.white,
+                  color: Colors.black87,
                 ),
               ),
               const SizedBox( height: 20, ),

@@ -45,10 +45,28 @@ class _CountdownMobile extends GetView<CountDownController> {
               children: [
                 const SizedBox( height: 10.0, ),
                 new Text(
-                  "Lenda & Riyanto",
+                  "Lenda",
                   textAlign: TextAlign.center,
                   style: new TextStyle(
-                    color: Colors.white,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 48.0,
+                  ),
+                ),
+                new Text(
+                  "&",
+                  textAlign: TextAlign.center,
+                  style: new TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 48.0,
+                  ),
+                ),
+                new Text(
+                  "Riyanto",
+                  textAlign: TextAlign.center,
+                  style: new TextStyle(
+                    color: Colors.black87,
                     fontWeight: FontWeight.w500,
                     fontSize: 48.0,
                   ),
@@ -65,7 +83,7 @@ class _CountdownMobile extends GetView<CountDownController> {
                   "Akan melakukan pernikahan pada 10 Oktober 2020",
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: Colors.black87,
                     fontWeight: FontWeight.w300,
                     fontSize: 20.0,
                   ),
@@ -75,9 +93,21 @@ class _CountdownMobile extends GetView<CountDownController> {
                   "Dari pukul 13:00 WIB sampai 16:00 WIB",
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: Colors.black87,
                     fontWeight: FontWeight.w300,
                     fontSize: 20.0,
+                  ),
+                ),
+                const SizedBox( height: 20.0, ),
+                new Obx(
+                  () => new Text(
+                    controller.title.value,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w300,
+                      fontSize: 24.0,
+                    ),
                   ),
                 ),
                 const SizedBox( height: 20.0, ),
@@ -110,7 +140,7 @@ class _CountdownMobile extends GetView<CountDownController> {
                     ),
                     const SizedBox( width: 10, ),
                     new Obx(
-                          () => new _Count( count: controller.seconds, description: "Detik", ),
+                          () => new _Count( count: controller.seconds, description: "Detik",  ),
                     ),
                   ],
                 ),
@@ -152,7 +182,7 @@ class _CountdownDesktop extends GetView<CountDownController> {
                 "Lenda & Riyanto",
                 textAlign: TextAlign.center,
                 style: new TextStyle(
-                  color: Colors.white,
+                  color: Colors.black87,
                   fontWeight: FontWeight.w700,
                   fontSize: 48.0,
                 ),
@@ -169,7 +199,7 @@ class _CountdownDesktop extends GetView<CountDownController> {
                 "Akan melakukan pernikahan pada 10 Oktober 2020",
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: Colors.black87,
                   fontWeight: FontWeight.w300,
                   fontSize: 24.0,
                 ),
@@ -179,10 +209,22 @@ class _CountdownDesktop extends GetView<CountDownController> {
                 "Dari pukul 13:00 WIB sampai 16:00 WIB",
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: Colors.black87,
                   fontWeight: FontWeight.w300,
                   fontSize: 24.0,
                 ),
+              ),
+              const SizedBox( height: 30.0, ),
+              new Obx(
+                  () => new Text(
+                    controller.title.value,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w300,
+                      fontSize: 24.0,
+                    ),
+                  ),
               ),
               const SizedBox( height: 20.0, ),
               new Row(
@@ -253,11 +295,11 @@ class _Count extends StatelessWidget {
           new CountByClock(
             count,
             digitCount: 2,
-            tickColor: Colors.white,
-            baseColor: Theme.of(context).primaryColor,
+            tickColor: Theme.of(context).primaryColorDark,
+            baseColor: Colors.transparent,
             clockArea: clockArea,
             tickThickness: tickThickness,
-            flatStyle: false,
+            flatStyle: true,
             curve: Curves.elasticOut,
             hideTick: true,
           ),
@@ -278,7 +320,8 @@ class _Count extends StatelessWidget {
 
 class CountDownController extends GetxController {
   Timer _timer;
-  final Rx<Duration> duration = new Rx<Duration>( weddingDate.difference( DateTime.now() ) );
+  final duration = new Rx<Duration>( weddingDate.difference( DateTime.now() ) );
+  final title = new RxString("");
 
   int get days => duration.value.inDays;
   int get hours => duration.value.inHours % 24;
@@ -287,15 +330,26 @@ class CountDownController extends GetxController {
 
   @override
   void onInit() {
-    duration.value = weddingDate.difference( DateTime.now() );
+    duration.value = getDifference();
     _timer = new Timer.periodic( const Duration( seconds: 1 ), ( Timer timer ) {
       if ( duration.value.inSeconds > 0 ) {
-        duration.value = weddingDate.difference( DateTime.now() );
+        duration.value = getDifference();
       } else {
-
+        timer?.cancel();
       }
     });
     super.onInit();
+  }
+
+  Duration getDifference() {
+    if ( weddingDate.compareTo( DateTime.now() ) > 0 ) {
+      title.value = "Countdown";
+      return weddingDate.difference( DateTime.now() );
+    }
+    else {
+      title.value = "Telah menikah selama";
+      return DateTime.now().difference( weddingDate );
+    }
   }
 
   @override

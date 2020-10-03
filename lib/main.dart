@@ -1,6 +1,8 @@
+import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pernikahan_lenda_riyanto/view/countdown.dart';
+import 'package:pernikahan_lenda_riyanto/view/link_online.dart';
 import 'package:pernikahan_lenda_riyanto/view/location.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -37,99 +39,109 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => new _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) => new Scaffold(
-    body: new ListView(
-      children: [
-        new Countdown(),
-        new Location(),
-        const SizedBox( height: 10.0, ),
-        new Center(
-          child: const Text(
-            "🄯 Copyleft Lenda & Riyanto. License GPLV3",
-            textAlign: TextAlign.center,
-          ),
-        ),
-        const SizedBox( height: 10.0, ),
-        new Center(
-          child: new FlatButton(
+    body: new AnimatedBackground(
+      behaviour: new RandomParticleBehaviour(),
+      vsync: this,
+      child: new ListView(
+        children: [
+          new Countdown(),
+          new Location(),
+          new LinkOnline(),
+          const SizedBox( height: 10.0, ),
+          new Center(
             child: const Text(
-              "Source Code",
+              "🄯 Copyleft Lenda & Riyanto. License GPLV3",
+              textAlign: TextAlign.center,
             ),
-            textColor: Theme.of(context).primaryColor,
-            onPressed: () async {
-              final url = "https://github.com/LeonColt/marriage_lenda_riyanto";
-              if ( await canLaunch( url ) ) {
-                launch( url );
-              } else {
-                Get.snackbar(
-                  null,
-                  "Tidak dapat membuka halaman source code.",
-                  duration: const Duration( seconds: 3 ),
-                  isDismissible: true,
-                  colorText: Theme.of( Get.context ).primaryTextTheme.headline6.color,
-                  backgroundColor: Theme.of( Get.context ).errorColor,
-                  icon: new Icon( Icons.error, color: Theme.of( Get.context ).primaryTextTheme.headline6.color, ),
-                  snackPosition: SnackPosition.BOTTOM,
-                );
-              }
-            },
           ),
-        ),
-        const SizedBox( height: 10.0, ),
-        new Center(
-          child: new FlatButton(
-            child: const Text(
-              "Kontribusi Gambar Ayam",
+          const SizedBox( height: 10.0, ),
+          new Center(
+            child: new FlatButton(
+              child: const Text(
+                "Source Code",
+              ),
+              textColor: Theme.of(context).primaryColor,
+              onPressed: () async {
+                final url = "https://github.com/LeonColt/marriage_lenda_riyanto";
+                if ( await canLaunch( url ) ) {
+                  launch( url );
+                } else {
+                  Get.snackbar(
+                    null,
+                    "Tidak dapat membuka halaman source code.",
+                    duration: const Duration( seconds: 3 ),
+                    isDismissible: true,
+                    colorText: Theme.of( Get.context ).primaryTextTheme.headline6.color,
+                    backgroundColor: Theme.of( Get.context ).errorColor,
+                    icon: new Icon( Icons.error, color: Theme.of( Get.context ).primaryTextTheme.headline6.color, ),
+                    snackPosition: SnackPosition.BOTTOM,
+                  );
+                }
+              },
             ),
-            textColor: Theme.of(context).primaryColor,
-            onPressed: () async {
-              final url = "https://lovepik.com/images/png-animal.html";
-              if ( await canLaunch( url ) ) {
-                launch( url );
-              } else {
-                Get.snackbar(
-                  null,
-                  "Tidak dapat membuka link.",
-                  duration: const Duration( seconds: 3 ),
-                  isDismissible: true,
-                  colorText: Theme.of( Get.context ).primaryTextTheme.headline6.color,
-                  backgroundColor: Theme.of( Get.context ).errorColor,
-                  icon: new Icon( Icons.error, color: Theme.of( Get.context ).primaryTextTheme.headline6.color, ),
-                  snackPosition: SnackPosition.BOTTOM,
-                );
-              }
-            },
           ),
-        ),
-        new Center(
-          child: new FlatButton(
-            child: const Text(
-              "Kontribusi Background",
+          const SizedBox( height: 10.0, ),
+          new Center(
+            child: new FlatButton(
+              child: const Text(
+                "Kontribusi Gambar Ayam",
+              ),
+              textColor: Theme.of(context).primaryColor,
+              onPressed: () async {
+                final url = "https://lovepik.com/images/png-animal.html";
+                if ( await canLaunch( url ) ) {
+                  launch( url );
+                } else {
+                  Get.snackbar(
+                    null,
+                    "Tidak dapat membuka link.",
+                    duration: const Duration( seconds: 3 ),
+                    isDismissible: true,
+                    colorText: Theme.of( Get.context ).primaryTextTheme.headline6.color,
+                    backgroundColor: Theme.of( Get.context ).errorColor,
+                    icon: new Icon( Icons.error, color: Theme.of( Get.context ).primaryTextTheme.headline6.color, ),
+                    snackPosition: SnackPosition.BOTTOM,
+                  );
+                }
+              },
             ),
-            textColor: Theme.of(context).primaryColor,
-            onPressed: () async {
-              final url = "https://wallpaperaccess.com/japanese-roses";
-              if ( await canLaunch( url ) ) {
-                launch( url );
-              } else {
-                Get.snackbar(
-                  null,
-                  "Tidak dapat membuka link.",
-                  duration: const Duration( seconds: 3 ),
-                  isDismissible: true,
-                  colorText: Theme.of( Get.context ).primaryTextTheme.headline6.color,
-                  backgroundColor: Theme.of( Get.context ).errorColor,
-                  icon: new Icon( Icons.error, color: Theme.of( Get.context ).primaryTextTheme.headline6.color, ),
-                  snackPosition: SnackPosition.BOTTOM,
-                );
-              }
-            },
           ),
-        )
-      ],
+          new Center(
+            child: new FlatButton(
+              child: const Text(
+                "Kontribusi Background",
+              ),
+              textColor: Theme.of(context).primaryColor,
+              onPressed: () async {
+                final url = "https://wallpaperaccess.com/japanese-roses";
+                if ( await canLaunch( url ) ) {
+                  launch( url );
+                } else {
+                  Get.snackbar(
+                    null,
+                    "Tidak dapat membuka link.",
+                    duration: const Duration( seconds: 3 ),
+                    isDismissible: true,
+                    colorText: Theme.of( Get.context ).primaryTextTheme.headline6.color,
+                    backgroundColor: Theme.of( Get.context ).errorColor,
+                    icon: new Icon( Icons.error, color: Theme.of( Get.context ).primaryTextTheme.headline6.color, ),
+                    snackPosition: SnackPosition.BOTTOM,
+                  );
+                }
+              },
+            ),
+          )
+        ],
+      ),
     ),
   );
 }
